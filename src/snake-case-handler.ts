@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
-import { Options as snakeOptions } from 'snakecase-keys'
+import snakecaseKeys, { Options as snakeOptions } from 'snakecase-keys'
+import camelcaseKeys from 'camelcase-keys'
 import unless from 'express-unless'
-const snakecaseKeys = require('snakecase-keys')
-const camelcaseKeys = require('camelcase-keys')
 
 export const snakeCaseHandler = (options: snakeOptions) => {
     const snakeCaseResHandler = (_req: Request, res: Response, next: NextFunction) => {
@@ -14,11 +13,14 @@ export const snakeCaseHandler = (options: snakeOptions) => {
             send.call(this, body)
             return res
         }
+
         next()
     }
+    
     const snakeCaseReqHandler = (req: Request, _res: Response, next: NextFunction) => {
-        console.log(`called keys: ${req.body}, typeof: ${typeof req.body}`)
-        req.body = camelcaseKeys(req.body)
+        req.body = camelcaseKeys(req.body, options)
+        req.params = camelcaseKeys(req.params, options)
+        
         next()
     }
     snakeCaseResHandler.unless = unless
