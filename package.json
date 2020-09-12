@@ -1,7 +1,7 @@
 {
   "name": "express-camelcase-middleware",
   "version": "0.1.0",
-  "description": "Convert to and from camelcase",
+  "description": "Convert requests to and from snakecase to camelcase",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
