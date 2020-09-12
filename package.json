@@ -1,6 +1,6 @@
 {
   "name": "express-camelcase-middleware",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Convert to and from camelcase",
   "main": "index.js",
   "scripts": {
