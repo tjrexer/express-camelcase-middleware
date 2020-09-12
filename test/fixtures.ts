@@ -107,3 +107,13 @@ export const listCamel = [
         }
     }
 ]
+
+export const snakeParams = {
+    test_param: 'test', 
+    test_param2: 'test'
+}
+
+export const camelParams = {
+    testParam: 'test',
+    testParam2: 'test'
+}
