@@ -2,7 +2,7 @@ import request from 'supertest'
 import express from 'express'
 
 import { snakeCaseHandler } from '../src/snake-case-handler'
-import { snakeKeys, camelKeys, listCamel, listSnake, snakeParams, camelParams } from './fixtures'
+import { snakeKeys, camelKeys, listCamel, listSnake, snakeQueryString, snakeQueryConverted } from './fixtures'
 
 // Dummy server for testing
 const app = express()
@@ -20,7 +20,7 @@ const func = {
 }
 
 app.get('/query', function(req, res){
-    func.testFunc2(req.body)
+    func.testFunc(req.query)
     res.status(200).send()
 })
 
@@ -39,9 +39,14 @@ app.get('/data/list', function(_req, res) {
 
 describe('snake-case middleware', () => {    
     let tests: request.Test
-    const spy = jest.spyOn(func, 'testFunc')
+    let spy: jest.SpyInstance
+    
 
-    afterAll(() => {
+    beforeEach(() => {
+        spy = jest.spyOn(func, 'testFunc')
+    })
+    
+    afterEach(() => {
         jest.clearAllMocks()
     })
 
@@ -77,10 +82,9 @@ describe('snake-case middleware', () => {
             )
     })
 
-    it('GET /query snakecase params', async () => {
-        tests = request(app).get('/query')
-        const spy2 = jest.spyOn(func, 'testFunc2')
-        await tests.send(snakeParams)
-        expect(spy2).toHaveBeenCalledWith(camelParams)
+    it('GET /query snakecase query', async() => {
+        tests = request(app).get(`/query?${snakeQueryString}`)
+        await tests.send()
+        expect(spy).toHaveBeenCalledWith(snakeQueryConverted)
     })
 })

@@ -108,12 +108,16 @@ export const listCamel = [
     }
 ]
 
-export const snakeParams = {
-    test_param: 'test', 
-    test_param2: 'test'
-}
+export const snakeQueryString = 'test_param=test&test_param2=test'
 
-export const camelParams = {
+export const camelQueryString = 'testParam=test&testParam2=test'
+
+export const snakeQueryConverted = {
     testParam: 'test',
     testParam2: 'test'
+}
+
+export const camelQueryConverted = {
+    test_param: 'test', 
+    test_param2: 'test'
 }
