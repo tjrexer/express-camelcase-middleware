@@ -1,14 +1,14 @@
 import request from 'supertest'
 import express from 'express'
 
-import { snakeCaseHandler } from '../src/snake-case-handler'
-import { snakeKeys, camelKeys, listCamel, listSnake, snakeQueryString, snakeQueryConverted } from './fixtures'
+import { camelCaseHandler } from '../src/camel-case-handler'
+import { snakeKeys, camelKeys, listCamel, listSnake, camelQueryString, camelQueryConverted } from './fixtures'
 
 // Dummy server for testing
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(snakeCaseHandler({deep: true}))
+app.use(camelCaseHandler({deep: true}))
 
 const func = {
     testFunc(_object: {}){
@@ -34,7 +34,7 @@ app.get('/data/list', function(_req, res) {
     res.status(200).send(listCamel)
 })
 
-describe('snake-case middleware', () => {    
+describe('camel-case middleware', () => {    
     let tests: request.Test
     let spy: jest.SpyInstance
     
@@ -47,41 +47,41 @@ describe('snake-case middleware', () => {
         jest.clearAllMocks()
     })
 
-    it('POST /data snakecase', async () => {
+    it('POST /data camelcase', async () => {
         tests = request(app).post('/data')
-        await tests.send(snakeKeys)
-        expect(spy).toHaveBeenCalledWith(camelKeys)
+        await tests.send(camelKeys)
+        expect(spy).toHaveBeenCalledWith(snakeKeys)
     })
 
-    it('POST /data snakecase list', async() => {
+    it('POST /data camelcase list', async() => {
         tests = request(app).post('/data')
-        await tests.send(listSnake)
-        expect(spy).toHaveBeenCalledWith(listCamel)
+        await tests.send(listCamel)
+        expect(spy).toHaveBeenCalledWith(listSnake)
     })
     
-    it('GET /data snakecase', async () => {
+    it('GET /data camelcase', async () => {
         tests = request(app).get('/data')
-        await tests.send(camelKeys)
+        await tests.send(snakeKeys)
             .then(
                 res => {
-                    expect(res.body).toEqual(snakeKeys)
+                    expect(res.body).toEqual(camelKeys)
                 }
             )
     })
 
     it('GET /data/list snakecase', async () => {
         tests = request(app).get('/data/list')
-        await tests.send(listCamel)
+        await tests.send(listSnake)
             .then(
                 res => {
-                    expect(res.body).toEqual(listSnake)
+                    expect(res.body).toEqual(listCamel)
                 }
             )
     })
 
     it('GET /query snakecase query', async() => {
-        tests = request(app).get(`/query?${snakeQueryString}`)
+        tests = request(app).get(`/query?${camelQueryString}`)
         await tests.send()
-        expect(spy).toHaveBeenCalledWith(snakeQueryConverted)
+        expect(spy).toHaveBeenCalledWith(camelQueryConverted)
     })
 })
