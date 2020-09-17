@@ -2,42 +2,45 @@
 
 Used to convert api requests to/from camelcase/snakecase depending on your requirements.
 
-## Getting Started
-### Prerequisites
-* Node >=10.14.2
-* npm 6.4.1
+There are 2 middlewares with this package.  
 
-### Running Local Development
-Since this is a package for middleware, there an express server is not required to be set up.  One is defined and used by supertest in the test file.
+### snakeCaseHandler
+snakeCaseHandler will handle conversions to and from snake_case where camelCase is used internally in an app, with snake_case being supported by the API.  The handler accepts all options from [snakecase-keys](https://www.npmjs.com/package/snakecase-keys).
+
+### camelCaseHandler
+camelCaseHandler will handle conversions to and from camelCase where snake_case is used internally in an app, with camelCase being supported by the API. The handler accepts all options from [camelcase-keys](https://www.npmjs.com/package/camelcase-keys).
+
+## Installing
+```
+npm i express-camelcase-middleware
+```
+
+## Usage
+You must import the middleware, and then add it to your express app as shown below.  It is required to also include `express.json()` as well as `express.urlencode({extended:true})` since these are used by express to handle conversions of the requests.
+
+### camelCaseHandler
+Recommended options used are `{deep: true}`
 
 ```
-npm i
-npm run test
+import { camelCaseHandler } from express-camelcase-middleware
+
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(camelCaseHandler(options)
 ```
 
-## Contributing
+### snakeCaseHandler
+Recommended options used are `{deep: true}`
 
-When contributing to this reposity, please first open an issue and discuss intended changes with maintainers.  If there is already an issue open for the feature you are looking to develop, please just coordinate with maintainers before assigning issue to yourself.
+```
+import { snakeCaseHandler } from express-camelcase-middleware
 
-### Branches
-
-`master` is the main branch from which we publish packages.  `next` is the branch from which we will publish the next release.  All `issue` branches should be branched from `master`, unless specifically told by the maintainers to use a different branch.  All pull requests should be submitted to merge with `next` in order to make the next release.
-
-### Workflow
-
-- Fork repo
-- Create an issue branch
-- Commit your changes
-- Open a PR against `next`.
-- Link the Issue to your PR.
-
-### Pull Request Guidelines
-
-- PRs should be submitted to merge with `next`.
-- PRs should be small in scope, work on 1 issue in a single PR.
-- Link the Issue you are working to your PR.
-
-You can add as many commits to your PR as you would like.  All commits will be squashed into a single commit when merging PR.
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(snakeCaseHandler(options)
+```
 
 ## Built With
 - [Express](http://expressjs.com) - Web Framework
