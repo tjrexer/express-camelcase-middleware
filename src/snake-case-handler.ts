@@ -16,12 +16,12 @@ export const snakeCaseHandler = (options: snakeOptions) => {
 
         next()
     }
-    
+
     const snakeCaseReqHandler = (req: Request, _res: Response, next: NextFunction) => {
         req.body = camelcaseKeys(req.body, options)
         req.params = camelcaseKeys(req.params, options)
         req.query = camelcaseKeys(req.query, options)
-        
+
         next()
     }
     snakeCaseResHandler.unless = unless

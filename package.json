@@ -2,7 +2,7 @@
   "name": "express-camelcase-middleware",
   "version": "0.2.2",
   "description": "Convert requests to and from snake_case to camelCase",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "build": "rm -rf dist && tsc",
@@ -36,5 +36,9 @@
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
-  }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }
