@@ -27,7 +27,7 @@ import { camelCaseHandler } from express-camelcase-middleware
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(camelCaseHandler(options)
+app.use(camelCaseHandler(options))
 ```
 
 ### snakeCaseHandler
@@ -39,7 +39,7 @@ import { snakeCaseHandler } from express-camelcase-middleware
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(snakeCaseHandler(options)
+app.use(snakeCaseHandler(options))
 ```
 
 ## Built With
