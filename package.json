@@ -1,7 +1,7 @@
 {
   "name": "express-camelcase-middleware",
-  "version": "0.2.1",
-  "description": "Convert requests to and from snakecase to camelcase",
+  "version": "0.2.2",
+  "description": "Convert requests to and from snake_case to camelCase",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
@@ -14,18 +14,21 @@
     "snakecase"
   ],
   "author": "Tim Rexer",
+  "contributors": [
+    "Sakibul Alam (https://github.com/sakibulalam)"
+  ],
   "license": "ISC",
   "dependencies": {
-    "@types/express-unless": "^0.5.1",
-    "camelcase-keys": "^6.2.2",
-    "express": "^4.17.1",
-    "express-unless": "^0.5.0",
-    "snakecase-keys": "^3.2.0"
+    "camelcase-keys": "6.2.x",
+    "snakecase-keys": "3.2.x"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
+    "@types/express-unless": "^0.5.1",
     "@types/jest": "^26.0.12",
     "@types/supertest": "^2.0.10",
+    "express": "4.17.x",
+    "express-unless": "0.5.x",
     "from": "^0.1.7",
     "http-status-codes": "^2.1.2",
     "jest": "^26.4.2",

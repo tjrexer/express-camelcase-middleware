@@ -23,6 +23,7 @@
         "noFallthroughCasesInSwitch": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
+        "declaration": true
     },
     "include": [
         "src"
