@@ -1,6 +1,6 @@
 {
   "name": "express-camelcase-middleware",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Convert requests to and from snake_case to camelCase",
   "main": "dist/index.js",
   "scripts": {
